@@ -4,20 +4,44 @@
   <meta charset="UTF-8">
   <title>체육대회 점수표</title>
   <style>
-     @media (max-width: 600px) {
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
     table {
-      font-size: 12px;
       width: 100%;
-      max-width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 20px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
     }
     th, td {
-      padding: 6px 8px;
-      font-size: 12px;
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
     }
     h1 {
-      font-size: 20px;
+      margin-bottom: 20px;
+      font-size: 28px;
     }
-  }
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
