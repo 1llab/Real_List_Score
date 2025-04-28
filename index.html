@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>체육대회 점수표</title>
+  <style>
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🏆 체육대회 점수표</h1>
+
+<table id="scoreTable">
+  <thead>
+    <tr id="headerRow"></tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+const apiUrl = "여기에-Apps-Script-배포-URL"; // 여기에 너가 발급받은 JSON API 주소를 넣어
+
+function loadData() {
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const headerRow = document.getElementById('headerRow');
+      const tableBody = document.getElementById('tableBody');
+
+      // 헤더가 비어있으면 헤더 한 번 생성
+      if (headerRow.children.length === 0 && data.length > 0) {
+        const headers = Object.keys(data[0]);
+        headers.forEach(header => {
+          const th = document.createElement('th');
+          th.textContent = header;
+          headerRow.appendChild(th);
+        });
+      }
+
+      // 본문 비우고 다시 채우기
+      tableBody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        Object.values(row).forEach(cell => {
+          const td = document.createElement('td');
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+      });
+    })
+    .catch(error => {
+      console.error("데이터를 불러오는 중 오류:", error);
+    });
+}
+
+// 페이지 처음 로딩할 때 데이터 불러오기
+loadData();
+
+// 5초마다 새로 데이터 갱신
+setInterval(loadData, 5000);
+</script>
+
+</body>
+</html>
